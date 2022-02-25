@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Test Kubernetes / Rancher</title>
+    </h:head>
+    <h:body>
+        <h1>Session With CDI/JSF Test - Kubernetes (<a href="#{request.contextPath}/sessiontest">Servlet Test</a>) </h1>
+        <h3>Local: #{request.scheme}://#{request.localName}:#{request.localPort}</h3>
+        <h3>Remote: #{request.scheme}://#{request.remoteHost}:#{request.remotePort} - #{request.remoteAddr} </h3>
+        <h3>Request #{request.requestURL.toString()} </h3>    
+        <h3>SessionID: #{request.getSession(true).id} </h3>    
+        <h:form>
+            <h3> Add Session key/value </h3>
+            <h:panelGrid columns="5">
+                <h:outputText value="Key" />
+                <h:inputText value="#{indexControl.key}" />
+
+                <h:outputText value="Value" />
+                <h:inputText value="#{indexControl.value}" />
+                <h:commandButton value="Add" action="#{indexControl.add()}" />
+            </h:panelGrid>
+            <hr />
+            <h3> Values added in session </h3>
+
+            <h:dataTable value="#{indexControl.map.keySet().toArray()}" var="key" border="1">
+                <h:column>
+                    <f:facet name="header">Key</f:facet>
+                    <h:outputText value="#{key}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Value</f:facet>
+                    <h:outputText value="#{indexControl.map[key]}" />
+                </h:column>
+            </h:dataTable>
+            <hr />
+            <h:panelGrid columns="2">
+                <h:commandButton value="Clear Data" action="#{indexControl.clear()}" />
+                <h:commandButton value="Clear Session" action="#{indexControl.clearSession()}" />
+            </h:panelGrid>           
+            <hr />
+            #{indexControl.gitVersion}
+        </h:form>
+    </h:body>
+
+</html>
