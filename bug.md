@@ -1,6 +1,6 @@
 # Description #
 
- CDI/JSF Session Beans (@Named and @SessionScoped) is not retrieved correctly by payara micro with cluster in a kubernetes using a loadbalancer (nginx or traefik)  using payara/micro:5.2022.1 docker image.
+ CDI/JSF Session Beans (@Named and @SessionScoped) is not retrieved correctly by payara micro with Hazelcast data grid in a kubernetes using a loadbalancer (nginx or traefik)  using payara/micro:5.2022.1 docker image.
 
 ## Expected Outcome ##
 
@@ -16,6 +16,10 @@ If the app is deployed with only one POD the works correctly.
 
 ## Steps to reproduce ## 
 
+Clone the project  https://github.com/lfpaz/test-payara-kubernetes
+
+Compile with `mvn clean package`
+
 Deploy the aplication https://github.com/lfpaz/test-payara-kubernetes on a k8s cluster with at least 2 POD's with a loadbalancer (nginx or traefik), using the DockerFile.
 
 Open the app and in the "Session With CDI/JSF Test - Kubernetes"  Put some data in key and value and click "add". If the POD is changed by loadbalancer the data is not showed correctly.
@@ -26,7 +30,7 @@ Click on the link and view the same app with "Session With Servlet Test - Kubern
 
 - Docker image payara/micro:5.2022.1
 - Rancher v1.21.9 with kubernetes v1.21.9 
-- Loadbalancers testex with nginx and traefik 
+- Loadbalancers - nginx or traefik 
 - Deployed with self hosted gitlab
 - On self hosted servers
 
